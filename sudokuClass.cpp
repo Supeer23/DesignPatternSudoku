@@ -31,13 +31,15 @@ void sudokuBoard::printBoard() const {
     }
 }
 
-bool sudokuBoard::makeMove(int row, int col, int num){
-    if (isValid(row, col, num) && board[row][col] == 0) {
-            board[row][col] = num;
-            return true;
-        }
-
+bool sudokuBoard::makeMove(int row, int col, int num) {
+    if (!isValid(row, col, num) || board[row][col] != 0) {
+        // The attempted move is invalid, so return false
         return false;
+    }
+
+    // The attempted move is valid, so place the number on the board and return true
+    board[row][col] = num;
+    return true;
 }
 
 bool sudokuBoard::isValid(int row, int col, int num)const{
@@ -121,15 +123,15 @@ void sudokuGame::play() {
 }
 
 int main (){
-    int initialgrid[9][9] = {{5, 3, 0, 0, 7, 0, 0, 0, 0},
-                      {6, 0, 0, 1, 9, 5, 0, 0, 0},
-                      {0, 9, 8, 0, 0, 0, 0, 6, 0},
-                      {8, 0, 0, 0, 6, 0, 0, 0, 3},
-                      {4, 0, 0, 8, 0, 3, 0, 0, 1},
-                      {7, 0, 0, 0, 2, 0, 0, 0, 6},
-                      {0, 6, 0, 0, 0, 0, 2, 8, 0},
-                      {0, 0, 0, 4, 1, 9, 0, 0, 5},
-                      {0, 0, 0, 0, 8, 0, 0, 7, 9}};
+    int initialgrid[9][9] = {{0, 8, 0, 4, 7, 0, 1, 0, 2},
+                      {2, 0, 0, 5, 3, 8, 0, 0, 0},
+                      {0, 9, 8, 0, 0, 0, 0, 9, 0},
+                      {1, 0, 7, 2, 0, 4, 6, 8, 3},
+                      {0, 0, 0, 6, 8, 0, 0, 0, 0},
+                      {0, 6, 0, 9, 0, 3, 4, 2, 0},
+                      {9, 0, 6, 3, 0, 5, 8, 7, 1},
+                      {0, 5, 1, 7, 0, 6, 0, 0, 0},
+                      {4, 0, 0, 8, 9, 0, 2, 0, 0}};
     // Create an instance of the game with an empty grid
     sudokuGame mySudoku(initialgrid);
     // Play the game
