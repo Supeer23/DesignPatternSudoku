@@ -1,26 +1,32 @@
 #include <iostream>
-#include <string> // Include <string> instead of <string.h>
+#include <string> // Include <string> for std::string
 #include "player.h"
 
-// Avoid using namespace std globally
+using namespace std;
 
 player::player() {
-    std::cout << "Enter your Name: " << std::endl;
-    std::getline(std::cin, name); // Use getline() to handle names with spaces
-    std::cout << "Enter how many pre-filled numbers: " << std::endl;
-    while (!(std::cin >> numPre)) {
-        std::cout << "Invalid input. Please enter a number: " << std::endl;
-        std::cin.clear(); // Clear the error flag
-        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // Ignore invalid input
-    }
-    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // Clear the newline character
+    cout << "Enter your Name: ";
+    cin >> name;
+    // Input validation for difficulty level
+    do {
+        cout << "Enter Difficulty (1-3): ";
+        cin >> difficulty;
+        if (cin.fail() || difficulty < 1 || difficulty > 3) {
+            cin.clear(); // Clear error flags
+            cin.ignore(numeric_limits<streamsize>::max(), '\n'); // Discard invalid input
+            cout << "Invalid input. Please enter a number between 1 and 3." << endl;
+        }
+    } while (difficulty < 1 || difficulty > 3);
 }
 
-
-std::string player::getName() const {
+string player::getName() const {
     return name;
 }
 
-int player::getPreFillNumber() const {
-    return numPre;
+int player::getDifficulty() const {
+    return difficulty;
+}
+
+void player::setDifficulty(int d) {
+    difficulty = d;
 }

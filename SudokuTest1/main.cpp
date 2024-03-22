@@ -9,7 +9,8 @@ using namespace std;
 
 int main(){
     game game;
+    sBoard board;
     player player;
-    game.initialize(player.getPreFillNumber());
+    game.initialize(board.getFilename(), player.getDifficulty());
     game.play(player.getName());
 }

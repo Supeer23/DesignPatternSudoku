@@ -41,19 +41,6 @@ bool sBoard::checkBox(int sRow, int sCol, int num) const {
     return false;
 }
 
-void sBoard::generateNum(int numPre) {
-    srand(time(nullptr));
-    int count = 0;
-    while (count < numPre) {
-        int row = rand() % s;
-        int col = rand() % s;
-        int num = rand() % s;
-        if (board[row][col] == Emt && isSafe(row, col, num)) {
-            setNum(row, col, num);
-            ++count;
-        }
-    }
-}
 
 void sBoard::printBoard() {
     system("cls");
@@ -61,7 +48,7 @@ void sBoard::printBoard() {
         for (int col = 0; col < s; col++) {
             cout << board[row][col] << " ";
             if (col == 2 || col == 5) {
-                cout << "|";
+                cout << " | ";
             }
         }
         cout << endl;
@@ -69,14 +56,6 @@ void sBoard::printBoard() {
             cout << "---------------------" << endl;
         }
     }
-}
-
-bool sBoard::isPrefilled(int row, int col) const {
-    return preFill[row][col];
-}
-
-void sBoard::markPreFill(int row, int col) {
-    preFill[row][col] = true;
 }
 
 bool sBoard::isValid(int row, int col, int num, int sRow, int sCol) const {
@@ -89,4 +68,29 @@ bool sBoard::makeMove(int row, int col, int num) {
     }
     setNum(row, col, num);
     return true;
+}
+
+void sBoard::loadBoard(string& filename){
+    ifstream file(filename);
+    if(file.is_open()){
+        int row, col; // Declare row and col outside the loops
+        for (row = 0; row < 9; row++) {
+            for (col = 0; col < 9; col++) {
+                file >> board[row][col];
+            }
+        }
+        file.close();
+    }
+    else {
+        cerr << "Failed to open file" << endl;
+        exit(1);
+    }
+}
+
+string sBoard::getFilename(){
+    return filename;
+}
+
+void sBoard::setFilename(string n){
+    filename = n;
 }
