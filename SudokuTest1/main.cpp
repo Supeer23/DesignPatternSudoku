@@ -8,9 +8,10 @@
 using namespace std;
 
 int main(){
-    game game;
+    game gameManager;
     sBoard board;
-    player player;
-    game.initialize(board.getFilename(), player.getDifficulty());
-    game.play(player.getName());
+    player myPlayer;
+    myPlayer.addInfo();
+    gameManager.initialize(board.getFilename(), myPlayer.getDifficulty());
+    gameManager.play(myPlayer.getName());
 }

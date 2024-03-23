@@ -48,7 +48,7 @@ void sBoard::printBoard() {
         for (int col = 0; col < s; col++) {
             cout << board[row][col] << " ";
             if (col == 2 || col == 5) {
-                cout << " | ";
+                cout << "|";
             }
         }
         cout << endl;

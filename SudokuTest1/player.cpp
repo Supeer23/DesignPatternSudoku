@@ -1,25 +1,16 @@
+// player.cpp
 #include <iostream>
-#include <string> // Include <string> for std::string
+#include <limits>
 #include "player.h"
 
-using namespace std;
-
-player::player() {
-    cout << "Enter your Name: ";
-    cin >> name;
-    // Input validation for difficulty level
-    do {
-        cout << "Enter Difficulty (1-3): ";
-        cin >> difficulty;
-        if (cin.fail() || difficulty < 1 || difficulty > 3) {
-            cin.clear(); // Clear error flags
-            cin.ignore(numeric_limits<streamsize>::max(), '\n'); // Discard invalid input
-            cout << "Invalid input. Please enter a number between 1 and 3." << endl;
-        }
-    } while (difficulty < 1 || difficulty > 3);
+player::player() : difficulty(1) { // Initialize difficulty to 1 in the constructor
 }
 
-string player::getName() const {
+void player::setName(std::string n) {
+    name = n;
+}
+
+std::string player::getName() const {
     return name;
 }
 
@@ -29,4 +20,18 @@ int player::getDifficulty() const {
 
 void player::setDifficulty(int d) {
     difficulty = d;
+}
+
+void player::addInfo() {
+    std::cout << "Enter name: ";
+    std::cin >> name;
+    do {
+        std::cout << "Enter Difficulty (1-3): ";
+        std::cin >> difficulty;
+        if (std::cin.fail() || difficulty < 1 || difficulty > 3) {
+            std::cin.clear(); // Clear error flags
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // Discard invalid input
+            std::cout << "Invalid input. Please enter a number between 1 and 3." << std::endl;
+        }
+    } while (difficulty < 1 || difficulty > 3);
 }

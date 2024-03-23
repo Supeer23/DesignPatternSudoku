@@ -6,48 +6,47 @@
 #include <random>
 using namespace std;
 
-void game::initialize(string filename, int difficulty) {
-    srand(static_cast<unsigned int>(time(nullptr))); // Use std::time() instead of std::time(nullptr)
-    int randomI = rand() % 3; // 0-2
-    switch (player.getDifficulty()) { // Ensure you have a player object to call getDifficulty() on
+void game::initialize(std::string filename, int difficulty) {
+    srand(static_cast<unsigned int>(std::time(nullptr)));
+    int randomI = rand() % 3;
+    switch (difficulty) {
         case 1:
             {
-                string easyPlaces[] = {
-                    "C:\\Users\\ihsan\\Documents\\GitHub\\DesignPatternSudoku\\SudokuTest1\\Board\\Easy\\easy 1.txt",
-                    "C:\\Users\\ihsan\\Documents\\GitHub\\DesignPatternSudoku\\SudokuTest1\\Board\\Easy\\easy 2.txt",
-                    "C:\\Users\\ihsan\\Documents\\GitHub\\DesignPatternSudoku\\SudokuTest1\\Board\\Easy\\easy 3.txt"
+                std::string easyPlaces[] = {
+                    "D:\\Tugas\\Coding\\Design Pattern\\SudokuTest1\\Board\\Easy\\easy 1.txt",
+                    "D:\\Tugas\\Coding\\Design Pattern\\SudokuTest1\\Board\\Easy\\easy 2.txt",
+                    "D:\\Tugas\\Coding\\Design Pattern\\SudokuTest1\\Board\\Easy\\easy 3.txt"
                 };
-                filename = easyPlaces[randomI]; // Randomly select a place for the AI to start from
+                filename = easyPlaces[randomI];
             }
             break;
         case 2:
             {
-                string normalPlaces[] = {
-                    "C:\\Users\\ihsan\\Documents\\GitHub\\DesignPatternSudoku\\SudokuTest1\\Board\\Normal\\normal 1.txt",
-                    "C:\\Users\\ihsan\\Documents\\GitHub\\DesignPatternSudoku\\SudokuTest1\\Board\\Normal\\normal 2.txt",
-                    "C:\\Users\\ihsan\\Documents\\GitHub\\DesignPatternSudoku\\SudokuTest1\\Board\\Normal\\normal 3.txt"
+                std::string normalPlaces[] = {
+                    "D:\\Tugas\\Coding\\Design Pattern\\SudokuTest1\\Board\\Normal\\normal 1.txt",
+                    "D:\\Tugas\\Coding\\Design Pattern\\SudokuTest1\\Board\\Normal\\normal 2.txt",
+                    "D:\\Tugas\\Coding\\Design Pattern\\SudokuTest1\\Board\\Normal\\normal 3.txt"
                 };
                 filename = normalPlaces[randomI];
             }
             break;
         case 3:
             {
-                string hardPlaces[] = {
-                    "C:\\Users\\ihsan\\Documents\\GitHub\\DesignPatternSudoku\\SudokuTest1\\Board\\Hard\\hard 1.txt",
-                    "C:\\Users\\ihsan\\Documents\\GitHub\\DesignPatternSudoku\\SudokuTest1\\Board\\Hard\\hard 2.txt",
-                    "C:\\Users\\ihsan\\Documents\\GitHub\\DesignPatternSudoku\\SudokuTest1\\Board\\Hard\\hard 3.txt"
+                std::string hardPlaces[] = {
+                    "D:\\Tugas\\Coding\\Design Pattern\\SudokuTest1\\Board\\Hard\\hard 1.txt",
+                    "D:\\Tugas\\Coding\\Design Pattern\\SudokuTest1\\Board\\Hard\\hard 2.txt",
+                    "D:\\Tugas\\Coding\\Design Pattern\\SudokuTest1\\Board\\Hard\\hard 3.txt"
                 };
                 filename = hardPlaces[randomI];
             }
             break;
         default:
-            cerr << "Invalid difficulty level!" << endl;
+            std::cerr << "Invalid difficulty level!" << std::endl;
             exit(1);
             break;
     }
     board.loadBoard(filename);
 }
-
 bool game::checkWin(int row, int col, int num) const {
     // Use different variable names for loop counters
     for (int r = 0; r < s; r++) {

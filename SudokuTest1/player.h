@@ -1,19 +1,20 @@
+// player.h
 #ifndef PLAYER_H
 #define PLAYER_H
-#include <iostream>
-#include <string.h>
-using namespace std;
 
-class player{
-    private:
-    string name;
-    int difficulty; //1-easy, 2-medium, 3-hard
-    public:
-    player();
-    string getName()const;
-    void setName(string n);
+#include <string>
+
+class player {
+private:
+    std::string name;
+    int difficulty;
+public:
+    player(); // Constructor
+    void setName(std::string n);
+    std::string getName() const;
     int getDifficulty() const;
     void setDifficulty(int d);
+    void addInfo();
 };
 
-#endif
+#endif // PLAYER_H
